@@ -70,7 +70,7 @@ class Board:
 
     def checkWidth(self, p):
         n = math.floor(math.log(p.val))
-        self.width = n if n > self.width
+        self.width = n if n > self.width else self.width
 
     def getEmptyLocations(self):
         """ returns a list of (r, c) tuples referring to empty locations 

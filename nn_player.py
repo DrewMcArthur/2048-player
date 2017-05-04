@@ -11,7 +11,7 @@ class nn_player(Player):
         self.nn = NN([16,4])
 
         self.weightFile = open("2048_nn_weights.pysave", "wb+")
-        if os.stat("2048_nn_weights.pysave").st_size != 0:
+        if os.stat("2048_nn_weights.pysave").st_size > 0:
             self.nn.loadWeights(self.weightFile)
 
         signal.signal(signal.SIGINT, self.signal_handler)
