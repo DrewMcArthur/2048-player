@@ -2,6 +2,7 @@ from game import Board, Piece
 from player import Player
 from nn_player import nn_player
 from getch import getch
+from tqdm import tqdm
 
 def main():
     b = Board()
@@ -26,4 +27,4 @@ def main():
     print("Wow, good game!")
 
 if __name__ == "__main__":
-    [main() for _ in range(100)]
+    [main() for _ in tqdm(range(100))]
