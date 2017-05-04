@@ -39,7 +39,7 @@ class nn_player(Player):
         # get the output, in the form of a list of the ranks of each output
         # e.g. [0.23, 0.49, 0.85, 0.17] => [2, 1, 0, 3]
         o = self.nn.get_output()
-        moves = self.get_ordered_moves(o)
+        moves = self.get_ordered_moves(state, o)
         # return a move
         exit()
 
@@ -83,7 +83,7 @@ class nn_player(Player):
 
         return data
 
-    def get_ordered_moves(self, outputs):
+    def get_ordered_moves(self, state, outputs):
         """ returns a copy of self.moves where unavailable moves 
             are replaced with None      """
         ops = state.getOps()
