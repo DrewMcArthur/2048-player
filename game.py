@@ -1,3 +1,9 @@
+"""
+    Drew McArthur
+    Classes to play 2048.
+    Includes piece and board class.  use apply to make a move
+"""
+
 import random
 import math
 
@@ -61,12 +67,6 @@ class Board:
             if self.apply(op) != self:
                 ret.append(op)
         return ret
-
-    def getRow(self, r):
-        return self.pieces[r]
-
-    def getCol(self, c):
-        return [row[c] for row in self.pieces]
 
     def checkWidth(self, p):
         n = math.floor(math.log(p.val))
