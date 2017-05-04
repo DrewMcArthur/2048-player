@@ -1,25 +1,23 @@
+""" use the neural net to play a game """
+
 from game import Board, Piece
-from player import Player
 from nn_player import nn_player
-from getch import getch
-from tqdm import tqdm
 
 def main():
+    # create a game, and two players. 
     b = Board()
-    p = Player(4)
-    nnp = nn_player()
+    nnp = nn_player()       # neural net player
     while not b.gameover():
-        #print()
-        #b.printBoard()
-        #print()
-        #print("Score:",b.score)
-        #print()
-        move = p.choose_move(b)
-        nnp.correct_move(b, move)
-        b = b.apply(move)
+        print()                         # then print out the board and score
+        b.printBoard()
+        print()
+        print("Score:",b.score)
+        print()
+        move = nnp.choose_move(b)   # get a move using the neural net
+        b = b.apply(move)           # play the move
 
-    nnp.save_net()
-    print()
+    nnp.save_net()                  # after each game, save the neural net
+    print()                         # then print out the board and score
     b.printBoard()
     print()
     print("Score:",b.score)
@@ -27,4 +25,4 @@ def main():
     print("Wow, good game!")
 
 if __name__ == "__main__":
-    [main() for _ in tqdm(range(100))]
+    main()

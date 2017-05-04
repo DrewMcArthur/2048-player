@@ -106,8 +106,13 @@ class NN:
 
     def get_discrete_output(self):
         """ returns the index of the output that had the highest activation."""
+        r = [0 for _ in range(4)]
         o = self.get_output()
-        return o.index(max(o))
+        for x in range(4):
+            i = o.index(max(o))
+            r[i] = x 
+            o.pop(i)
+        return r
 
     def print(self):
         print("{}, a NN with {} layers".format(self, self._numLayers))

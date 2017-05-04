@@ -30,16 +30,18 @@ class nn_player(Player):
     def choose_move(self, state):
         """ given a board, returns the neural net's choice move """
 
+        #moves = self.get_moves(state)
         # get a list of normalized inputs that represents the board
         d = self.normalize_grid(state)
         # input that into the neural net
         self.nn.forward_propagate(d)
 
-        # get the output, in the form of an index of which output was highest
-        # e.g. [0.23, 0.49, 0.85, 0.17] => 2
-        o = self.nn.get_discrete_output()
-        # return the string move associated with that index
-        return self.moves[o]
+        # get the output, in the form of a list of the ranks of each output
+        # e.g. [0.23, 0.49, 0.85, 0.17] => [2, 1, 0, 3]
+        o = self.nn.get_output()
+        moves = self.get_ordered_moves(o)
+        # return a move
+        exit()
 
     def correct_move(self, state, move):
         """ gives the player a state and a "correct" move, 
@@ -80,3 +82,11 @@ class nn_player(Player):
             data[i] = self.normalize(data[i].val, mn, mx)
 
         return data
+
+    def get_ordered_moves(self, outputs):
+        """ returns a copy of self.moves where unavailable moves 
+            are replaced with None      """
+        ops = state.getOps()
+        movescores = zip(*sorted(zip(outputs, self.moves)))
+        for move in movescores:
+            print(move)
